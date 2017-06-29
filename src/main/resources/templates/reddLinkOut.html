@@ -6,7 +6,8 @@
   </head>
   <body>
       <h1>Room List Information</h1>
-      	<p th:text="'title: <a href="' + ${redditt.url} + > + th:text="'title: ' + ${redditt.title}"</a> />
+      	<p th:text="'title: <a href='"' + ${redditt.url} + '">"'" + th:text="'title: ' + ${redditt.title}"</a> />
      	<p th:text="'url: ' + ${redditt.url}" />
+ 
        </body>
 </html>
