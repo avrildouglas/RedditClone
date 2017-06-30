@@ -1,4 +1,4 @@
-create database redditt;
+create database avrildouglasredditt;
 create user 'reddittuser'@'localhost' identified by 'ThePoster';
-grant all on redditt.* to 'reddittuser'@'localhost';
+grant all on avrildouglasredditt.* to 'reddittuser'@'localhost';
 
