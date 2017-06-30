@@ -26,7 +26,7 @@ public class Reddit {
 	@Column(name = "created_at")
 //	@Column(name = "updated_at")
 	private Date createdAt;
-	
+	private Date newcreatedAt;
 	
 	public long getId() {
 		return id;
@@ -59,8 +59,9 @@ public class Reddit {
 	public void setUrl(String url) {
 		this.url = url;
 	}
+		
 	 @PrePersist
-	 void createdAt() {
+	 public void createdAt(Date createdAt) {
 	//	this.createdAt = this.updatedAt = new Date();
 		this.createdAt = new Date();
 	}

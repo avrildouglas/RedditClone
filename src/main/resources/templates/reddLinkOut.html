@@ -6,8 +6,14 @@
   </head>
   <body>
       <h1>Room List Information</h1>
-      	<p th:text="'title: <a href='"' + ${redditt.url} + '">"'" + th:text="'title: ' + ${redditt.title}"</a> />
-     	<p th:text="'url: ' + ${redditt.url}" />
+      <table>
+      	<th:block th:each="redditt : ${getAllPosts}">
+      	<tr>
+      		<td th:text="${redditt.url}">...</td>
+      		<td th:text="${redditt.title}">....</td>
+      		 <td th:text="${redditt.username}">....</td>
+      	</tr>
+     	 
  
        </body>
 </html>
