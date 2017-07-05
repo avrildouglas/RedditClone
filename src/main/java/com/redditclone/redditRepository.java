@@ -8,9 +8,8 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
 //@Repository
-public interface redditRepository  extends CrudRepository <Reddit, Long> {
+public interface redditRepository extends CrudRepository <Reddit, Long> {
 		
-//	ArrayList<Reddit> findBytitle(String title, Sort sort);	
 }
 
 

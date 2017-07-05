@@ -1,19 +1,24 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
   <head>
-      <title>Room List Information</title>
+      <title>Post Links Information</title>
       <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
   </head>
   <body>
-      <h1>Room List Information</h1>
+      <h1>Post List Information</h1>
       <table>
-      	<th:block th:each="redditt : ${getAllPosts}">
-      	<tr>
-      		<td th:text="${redditt.url}">...</td>
-      		<td th:text="${redditt.title}">....</td>
-      		 <td th:text="${redditt.username}">....</td>
-      	</tr>
-     	 
- 
+      	<th:block th:each="post : ${posts}">
+      		<tr>
+      			<td><a href="#" th:href="@{/posts/list/{posturl} (posturl = ${post.url})}" target = "_blank" th:text="${post.title}"></a></td>     				
+      		</tr>
+      		<tr> 	
+      		    <td th:text="${'submitted by ' + post.username}"></td>	
+       		</tr>
+       		<tr></tr>
+       				<!--  -->
+       				<!-- <a href="#"  -->
+             	 	 <!--  	<td><a href="http://www.yahoo.com" target="_blank">Go to Yahoo</a></td>  -->	
+      	</th:block> 
+     </table>
        </body>
 </html>

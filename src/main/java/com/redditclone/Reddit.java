@@ -10,10 +10,9 @@ import javax.persistence.PreUpdate;
 import javax.persistence.Id;
 import javax.persistence.PrePersist;
 
-
 @Entity
 public class Reddit {
-	
+
 	//private static final SimpleDateFormat formatDte = new SimpleDateFormat ("MMM dd, yyyy");
 	//private String createdAt = formatDte.format(d);
 	
@@ -23,10 +22,11 @@ public class Reddit {
 	private String username;
 	private String title;
 	private String url;
-	@Column(name = "created_at")
+	@Column(name = "createdAt")
+		//	, insertable=true, updatable = true)
 //	@Column(name = "updated_at")
-	private Date createdAt;
-	private Date newcreatedAt;
+	//@Column(name = "_username", )
+	private Date created;
 	
 	public long getId() {
 		return id;
@@ -59,14 +59,32 @@ public class Reddit {
 	public void setUrl(String url) {
 		this.url = url;
 	}
-		
-	 @PrePersist
-	 public void createdAt(Date createdAt) {
-	//	this.createdAt = this.updatedAt = new Date();
-		this.createdAt = new Date();
+	
+	@PrePersist
+	protected void onCreate() {
+	  created = new Date();
 	}
+	
+}
+		
+	// @PrePersist
+	// void createdAt(Date createdAt) {
+	//	this.createdAt = this.updatedAt = new Date();
+	 
+//	public void createdAt(Date createdAt);
+//		this.createdAt = new Date();
+	//}
+
+	//public Date getCreated() {
+	//	return createdAt;
+	//}
+//	@PrePersist
+//	void createdAt(Date createdAt) {
+//		this.createdAt = new Date();
+//	}
+
 //	 @PreUpdate
 //	void updateAt() {
-//		this.updatedAt = new Date();
-	}
+//		this.updatedAt = c;
+//	}
 	

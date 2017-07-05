@@ -4,26 +4,23 @@ import org.hibernate.mapping.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import com.redditclone.Reddit;
 
-import java.awt.print.Pageable;
-import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.util.Date;
 import java.util.Map;
 
-import javax.naming.AuthenticationException;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 @Controller
-@RequestMapping(path="/postlink")
+@RequestMapping(path="/posts")
 
 public class RedditController {
 	@Autowired
@@ -33,8 +30,6 @@ public class RedditController {
 /**	Date d = new Date();
 	private static final SimpleDateFormat formatDte = new SimpleDateFormat ("MMM dd, yyyy");
 	private String currDate = formatDte.format(d);
-	
-	
 
 
 	 Your site should have a home page that lists user supplied
@@ -54,9 +49,37 @@ public class RedditController {
 	Logged in users should have access to a page with a list of the links
 	that they have submitted.*/
 
+
+/**@GetMapping("/login")
+public String login(){
+	return "login";
+}*/
+	
+
+@RequestMapping("/list")
+public String postSubmitForm(Model model){
+	model.addAttribute("posts", reddRepository.findAll());
+	return "reddLinkOut";
+}
+	
+@GetMapping("/add")
+public String addNewPost(Model model){
+	model.addAttribute("post", new Reddit());
+	return "postlinkHTML";
+}
+
+@PostMapping("/add")
+public String processPost(@Valid Reddit post, BindingResult bindingResult) {
+	if (bindingResult.hasErrors()) {
+		return "postlinkHTML";
+	}
+		reddRepository.save(post);
+		return "redirect:/posts/list";
+}
+
 	   
-@RequestMapping("/add")
-public @ResponseBody String addNewPost(@RequestParam String title, @RequestParam String url,
+/**@RequestMapping("/update/{id}")
+public @ResponseBody String updatePost(@RequestParam String title, @RequestParam String url,
 		@RequestParam String username){
 	
 	Reddit r = new Reddit();
@@ -68,20 +91,12 @@ public @ResponseBody String addNewPost(@RequestParam String title, @RequestParam
 	
 	return "Save";
 	
-}
-/**@RequestMapping("/all")
-public String showPosts(Model model, Iterable<Long> pageable) {
+}*/
 
-    model.addAttribute("posts", reddRepository.findAll(pageable));
-    return "posts";
-  }*/
-
-
-@GetMapping(path="/all")
+/**@GetMapping(path="/all")
 public @ResponseBody Iterable<Reddit> getAllPosts() {
 
 	return reddRepository.findAll();
-}
-
+	}*/
 }	
 	
